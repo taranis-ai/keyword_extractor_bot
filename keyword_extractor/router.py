@@ -14,6 +14,11 @@ class BotEndpoint(MethodView):
     @debug_request(Config.DEBUG)
     @api_key_required
     def post(self):
+
+        # TODO 
+        # Add wordlist extraction
+        # Add IOC
+
         data = request.get_json()
         text = data.get("text", "")
         if not text:
