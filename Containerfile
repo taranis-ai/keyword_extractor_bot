@@ -18,7 +18,7 @@ RUN uv venv && \
 
 FROM python:3.12-slim
 
-ARG MODEL="ner"
+ARG MODEL="gliner"
 
 
 WORKDIR /app/
@@ -26,7 +26,7 @@ WORKDIR /app/
 RUN groupadd user && useradd --home-dir /app -g user user && chown -R user:user /app
 
 COPY --from=builder --chown=user:user /app/.venv /app/.venv
-COPY --chown=user:user keyword_extractor_bot /app/keyword_extractor_bot
+COPY --chown=user:user keyword_extractor /app/keyword_extractor
 COPY --chown=user:user README.md app.py LICENSE.md /app/
 
 USER user
@@ -41,7 +41,7 @@ ENV GRANIAN_HOST=0.0.0.0
 ENV MODEL=${MODEL}
 
 # bake models in to the image
-RUN python -c 'from keyword_extractor_bot.predictor_factory import PredictorFactory; PredictorFactory()'
+RUN python -c 'from keyword_extractor.predictor_factory import PredictorFactory; PredictorFactory()'
 
 EXPOSE 8000
 

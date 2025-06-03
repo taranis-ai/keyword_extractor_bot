@@ -12,7 +12,7 @@ set -eou pipefail
 build_tags=""
 build_args=""
 
-MODEL=${MODEL:-"ner"}
+MODEL=${MODEL:-"gliner"}
 
 # if not a git repo, build locally
 if [ -d .git ]; then

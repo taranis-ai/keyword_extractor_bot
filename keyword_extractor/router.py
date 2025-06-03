@@ -1,10 +1,10 @@
 from flask import Flask, Blueprint, jsonify, request
 from flask.views import MethodView
 
-from keyword_extractor_bot.predictor import Predictor
-from keyword_extractor_bot.predictor_factory import PredictorFactory
-from keyword_extractor_bot.decorators import api_key_required, debug_request
-from keyword_extractor_bot.config import Config
+from keyword_extractor.predictor import Predictor
+from keyword_extractor.predictor_factory import PredictorFactory
+from keyword_extractor.decorators import api_key_required, debug_request
+from keyword_extractor.config import Config
 
 class BotEndpoint(MethodView):
     def __init__(self, bot: Predictor) -> None:
@@ -15,14 +15,13 @@ class BotEndpoint(MethodView):
     @api_key_required
     def post(self):
         data = request.get_json()
-
-        # pre-process data here and pass it to self.bot.predict method
-        # e.g. extracted_data = data.get("key", "")
-        #      bot_result = self.bot.predict(extracted_data)
-        bot_result = None
-
-        # return bot_result as JSON
-        return jsonify({"result": bot_result})
+        text = data.get("text", "")
+        if not text:
+            return jsonify({"error": "No text provided for NER extraction"}), 400
+        try:
+            return jsonify(self.bot.predict(text))
+        except ValueError as e:
+            return jsonify({"error": str(e)}), 400
 
 
 class HealthCheck(MethodView):

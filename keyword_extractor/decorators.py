@@ -1,8 +1,8 @@
 from flask import request
 from functools import wraps
 
-from keyword_extractor_bot.config import Config
-from keyword_extractor_bot.log import logger
+from keyword_extractor.config import Config
+from keyword_extractor.log import logger
 
 def debug_request(debug=False):
     def decorator(func):

@@ -7,7 +7,7 @@ from typing import Optional
 
 from flask import request
 
-from keyword_extractor_bot.config import Config
+from keyword_extractor.config import Config
 
 
 class TaranisLogger:

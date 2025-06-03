@@ -19,7 +19,8 @@ dependencies = [
     "python-dotenv",
     "granian",
     "transformers",
-    "torch"
+    "torch",
+    "gliner>=0.2.20",
 ]
 dynamic = ["version"]
 
@@ -42,7 +43,7 @@ fallback_version = "0.0.0"
 tag_regex = "^refs/pull/(\\d+)/merge$"
 
 [tool.setuptools]
-packages = ["keyword_extractor_bot"]
+packages = ["keyword_extractor"]
 
 [tool.ruff]
 line-length = 142

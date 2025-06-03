@@ -1,10 +1,10 @@
 from flask import Flask
-from keyword_extractor_bot import router
+from keyword_extractor import router
 
 
 def create_app():
     app = Flask(__name__)
-    app.config.from_object("keyword_extractor_bot.config.Config")
+    app.config.from_object("keyword_extractor.config.Config")
 
     with app.app_context():
         init(app)

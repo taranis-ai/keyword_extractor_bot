@@ -1,5 +1,5 @@
-from keyword_extractor_bot.config import Config
-from keyword_extractor_bot.predictor import Predictor
+from keyword_extractor.config import Config
+from keyword_extractor.predictor import Predictor
 
 
 class PredictorFactory:
@@ -10,9 +10,9 @@ class PredictorFactory:
     """
 
     def __new__(cls, *args, **kwargs) -> Predictor:
-        if Config.MODEL == 'ner':
-            from keyword_extractor_bot.ner import Ner
-            return Ner(*args, **kwargs)
+        if Config.MODEL == 'gliner':
+            from keyword_extractor.gliner import GLiNERModel
+            return GLiNERModel(*args, **kwargs)
 
         raise ValueError(f"Unsupported model: {Config.MODEL}")
 
